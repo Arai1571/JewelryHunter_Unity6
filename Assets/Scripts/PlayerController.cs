@@ -5,7 +5,12 @@ public class PlayerController : MonoBehaviour
     Rigidbody2D rbody; //PlayerについているRigidbody2Dを扱うための変数
 
     float axisH; //入力の方向を記憶するための変数
-    public float speed=3.0f; //プレイヤーのスピードを調節
+    public float speed = 3.0f; //プレイヤーのスピードを調節
+
+    public float jumpPower = 9.0f; //ジャンプ力の調節。表でも触れるようにパブリック
+    bool goJump = false; //ジャンプフラグ（true:真on、false:偽off）。初期値はoffにしておく
+
+    bool onGround = false; //地面にいるかどうかの判定（地面にいるtrue,地面にいないfalse）
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -31,7 +36,13 @@ public class PlayerController : MonoBehaviour
         else if (axisH < 0)
         {
             //左を向く
-            transform.localScale = new Vector3(-1,1,1);
+            transform.localScale = new Vector3(-1, 1, 1);
+        }
+
+        //GetButtonDownメソッド→引数に指定下ボタンが押されたらtrueを返す、押されてなければfalseを返す
+        if (Input.GetButtonDown("Jump"))
+        {
+            Jump(); //Jumpメソッドの発動
         }
 
     }
@@ -40,6 +51,19 @@ public class PlayerController : MonoBehaviour
     void FixedUpdate()
     {
         //Velocityに値を代入。一時的にメモリに値を確保して目的となる変数してもらう。new演算子。感知された入力に基づいてプレイヤーを動かす。x＝axisH*speed、y＝rbody.linearVelocity.y
-        rbody.linearVelocity = new Vector2(axisH*speed, rbody.linearVelocity.y);
+        rbody.linearVelocity = new Vector2(axisH * speed, rbody.linearVelocity.y);
+
+        //ジャンプフラグが立ったら
+        if (goJump == true)
+        {
+            //ジャンプさせる→プレイヤーを上に押し出す
+            rbody.AddForce(new Vector2(0,jumpPower), ForceMode2D.Impulse);
+            goJump = false; //フラグをOffに戻す
+        }
+    }
+    //ジャンプボタンが押された時に呼び出されるメソッド
+    void Jump()
+    {
+        goJump = true; //ジャンプフラグをON
     }
 }
