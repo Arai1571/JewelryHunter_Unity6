@@ -10,7 +10,9 @@ public class PlayerController : MonoBehaviour
     public float jumpPower = 9.0f; //ジャンプ力の調節。表でも触れるようにパブリック
     bool goJump = false; //ジャンプフラグ（true:真on、false:偽off）。初期値はoffにしておく
 
-    bool onGround = false; //地面にいるかどうかの判定（地面にいるtrue,地面にいないfalse）
+    bool onGround = false; //レイキャスト用。地面にいるかどうかの判定（地面にいるtrue,地面にいないfalse）
+
+    public LayerMask groundLayer; //地面レイヤーを指名するための変数
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -50,6 +52,15 @@ public class PlayerController : MonoBehaviour
     //１秒間に50回(50fps)繰り返すように制御しながら行う繰り返しメソッド（ユーザごとのPC環境で変化しないように制御するフレームレートを追加）
     void FixedUpdate()
     {
+        //地面判定をサークルキャストで行って、その結果を変数onGroundに代入
+        onGround = Physics2D.CircleCast(
+            transform.position, //発射位置＝プレイヤーの位置（基準点）
+            0.2f,               //調査する縁の半径の指定
+            new Vector2(0,1.0f), //発射方向※下方向
+            0,                   //発射距離
+            groundLayer          //対象となるレイヤー情報
+            );
+
         //Velocityに値を代入。一時的にメモリに値を確保して目的となる変数してもらう。new演算子。感知された入力に基づいてプレイヤーを動かす。x＝axisH*speed、y＝rbody.linearVelocity.y
         rbody.linearVelocity = new Vector2(axisH * speed, rbody.linearVelocity.y);
 
