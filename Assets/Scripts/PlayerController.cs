@@ -11,8 +11,6 @@ public class PlayerController : MonoBehaviour
     void Start()
     {
         rbody = GetComponent<Rigidbody2D>(); //Playerについているコンポーネント情報を取得。Unity空間から呼び出し
-
-
     }
 
     // Update is called once per frame
@@ -25,12 +23,23 @@ public class PlayerController : MonoBehaviour
         //Velocityの元となる値の取得。（右なら1.0f 左なら-1.0f、何もなければ０）入力を感知する
         axisH = Input.GetAxisRaw("Horizontal");
 
+        if (axisH > 0)
+        {
+            //右を向く
+            transform.localScale = new Vector3(1, 1, 1);
+        }
+        else if (axisH < 0)
+        {
+            //左を向く
+            transform.localScale = new Vector3(-1,1,1);
+        }
+
     }
 
     //１秒間に50回(50fps)繰り返すように制御しながら行う繰り返しメソッド（ユーザごとのPC環境で変化しないように制御するフレームレートを追加）
-    private void FixedUpdate()
+    void FixedUpdate()
     {
-        //Velocityに値を代入。一時的にメモリに値を確保して目的となる変数してもらう。new演算子。感知された入力に基づいてプレイヤーを動かす
+        //Velocityに値を代入。一時的にメモリに値を確保して目的となる変数してもらう。new演算子。感知された入力に基づいてプレイヤーを動かす。x＝axisH*speed、y＝rbody.linearVelocity.y
         rbody.linearVelocity = new Vector2(axisH*speed, rbody.linearVelocity.y);
     }
 }
