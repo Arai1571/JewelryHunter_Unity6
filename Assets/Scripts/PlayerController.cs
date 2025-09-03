@@ -1,18 +1,19 @@
+using UnityEditor.SearchService;
 using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
+    [Header("プレイヤーの能力値")]
+     public float speed = 3.0f; //プレイヤーのスピードを調節
+     public float jumpPower = 9.0f; //ジャンプ力の調節。表でも触れるようにパブリック
+
+      [Header("地面判定の対象レイヤー")]
+     public LayerMask groundLayer; //地面レイヤーを指名するための変数
+
     Rigidbody2D rbody; //PlayerについているRigidbody2Dを扱うための変数
-
     float axisH; //入力の方向を記憶するための変数
-    public float speed = 3.0f; //プレイヤーのスピードを調節
-
-    public float jumpPower = 9.0f; //ジャンプ力の調節。表でも触れるようにパブリック
     bool goJump = false; //ジャンプフラグ（true:真on、false:偽off）。初期値はoffにしておく
-
     bool onGround = false; //レイキャスト用。地面にいるかどうかの判定（地面にいるtrue,地面にいないfalse）
-
-    public LayerMask groundLayer; //地面レイヤーを指名するための変数
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -58,14 +59,14 @@ public class PlayerController : MonoBehaviour
             0.2f,               //調査する縁の半径の指定
             new Vector2(0,1.0f), //発射方向※下方向
             0,                   //発射距離
-            groundLayer          //対象となるレイヤー情報
+            groundLayer          //対象となるレイヤー情報※LayerMask
             );
 
         //Velocityに値を代入。一時的にメモリに値を確保して目的となる変数してもらう。new演算子。感知された入力に基づいてプレイヤーを動かす。x＝axisH*speed、y＝rbody.linearVelocity.y
         rbody.linearVelocity = new Vector2(axisH * speed, rbody.linearVelocity.y);
 
         //ジャンプフラグが立ったら
-        if (goJump == true)
+        if (goJump)
         {
             //ジャンプさせる→プレイヤーを上に押し出す
             rbody.AddForce(new Vector2(0,jumpPower), ForceMode2D.Impulse);
@@ -75,6 +76,9 @@ public class PlayerController : MonoBehaviour
     //ジャンプボタンが押された時に呼び出されるメソッド
     void Jump()
     {
-        goJump = true; //ジャンプフラグをON
+        if (onGround)
+        {
+            goJump = true; //ジャンプフラグをON
+        }
     }
 }
