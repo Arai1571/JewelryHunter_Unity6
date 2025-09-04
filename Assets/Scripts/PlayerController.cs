@@ -11,6 +11,8 @@ public class PlayerController : MonoBehaviour
      public LayerMask groundLayer; //地面レイヤーを指名するための変数
 
     Rigidbody2D rbody; //PlayerについているRigidbody2Dを扱うための変数
+    Animator animator; //Animatorコンポーネントを扱うための変数
+
     float axisH; //入力の方向を記憶するための変数
     bool goJump = false; //ジャンプフラグ（true:真on、false:偽off）。初期値はoffにしておく
     bool onGround = false; //レイキャスト用。地面にいるかどうかの判定（地面にいるtrue,地面にいないfalse）
@@ -19,6 +21,7 @@ public class PlayerController : MonoBehaviour
     void Start()
     {
         rbody = GetComponent<Rigidbody2D>(); //Playerについているコンポーネント情報を取得。Unity空間から呼び出し
+        animator = GetComponent<Animator>(); //Animatorコンポーネントの情報を取得。
     }
 
     // Update is called once per frame
@@ -57,7 +60,7 @@ public class PlayerController : MonoBehaviour
         onGround = Physics2D.CircleCast(
             transform.position, //発射位置＝プレイヤーの位置（基準点）
             0.2f,               //調査する縁の半径の指定
-            new Vector2(0,1.0f), //発射方向※下方向
+            new Vector2(0, 1.0f), //発射方向※下方向
             0,                   //発射距離
             groundLayer          //対象となるレイヤー情報※LayerMask
             );
@@ -69,8 +72,20 @@ public class PlayerController : MonoBehaviour
         if (goJump)
         {
             //ジャンプさせる→プレイヤーを上に押し出す
-            rbody.AddForce(new Vector2(0,jumpPower), ForceMode2D.Impulse);
+            rbody.AddForce(new Vector2(0, jumpPower), ForceMode2D.Impulse);
             goJump = false; //フラグをOffに戻す
+        }
+
+        if (onGround)//地面の上にいるとき
+        {
+            if (axisH == 0)
+            {
+                animator.SetBool("Run", false); //Idleアニメに切り替え
+            }
+            else //左右が押されている
+            {
+                animator.SetBool("Run", true); //Runアニメに切り替え
+            }
         }
     }
     //ジャンプボタンが押された時に呼び出されるメソッド
@@ -79,6 +94,7 @@ public class PlayerController : MonoBehaviour
         if (onGround)
         {
             goJump = true; //ジャンプフラグをON
+            animator.SetTrigger("Jump");
         }
     }
 }
