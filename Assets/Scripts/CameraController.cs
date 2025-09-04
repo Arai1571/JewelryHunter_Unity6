@@ -6,6 +6,12 @@ public class CameraController : MonoBehaviour
     GameObject player;
     float x,y,z; //カメラの座標を決めるためのクラス変数
 
+    [Header("カメラの限界値")]
+    public float leftLimit;
+    public float rightLimit;
+    public float bottomLimit;
+    public float topLimit;
+
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -22,6 +28,23 @@ public class CameraController : MonoBehaviour
         //一旦プレイヤーのx座標、y座標の位置を変数に取得
         x = player.transform.position.x;
         y = player.transform.position.y;
+
+        if (x < leftLimit)
+        {
+            x = leftLimit;
+        }
+        else if (x > rightLimit)
+        {
+            x = rightLimit;
+        }
+        if (x < bottomLimit)
+        {
+            y = bottomLimit;
+        }
+        else if (x > topLimit)
+        {
+            x = topLimit;
+        }
 
         //取り決めた各変数xyzの値をカメラのポジションにする
         transform.position = new Vector3(x, y, z);
