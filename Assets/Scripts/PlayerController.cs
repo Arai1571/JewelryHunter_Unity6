@@ -4,11 +4,11 @@ using UnityEngine;
 public class PlayerController : MonoBehaviour
 {
     [Header("プレイヤーの能力値")]
-     public float speed = 3.0f; //プレイヤーのスピードを調節
-     public float jumpPower = 9.0f; //ジャンプ力の調節。表でも触れるようにパブリック
+    public float speed = 3.0f; //プレイヤーのスピードを調節
+    public float jumpPower = 9.0f; //ジャンプ力の調節。表でも触れるようにパブリック
 
-      [Header("地面判定の対象レイヤー")]
-     public LayerMask groundLayer; //地面レイヤーを指名するための変数
+    [Header("地面判定の対象レイヤー")]
+    public LayerMask groundLayer; //地面レイヤーを指名するための変数
 
     Rigidbody2D rbody; //PlayerについているRigidbody2Dを扱うための変数
     Animator animator; //Animatorコンポーネントを扱うための変数
@@ -76,16 +76,16 @@ public class PlayerController : MonoBehaviour
             goJump = false; //フラグをOffに戻す
         }
 
-    //if (onGround)//地面の上にいるとき
+        //if (onGround)//地面の上にいるとき
         //{
-            if (axisH == 0) //左右が押されていない
-            {
-                animator.SetBool("Run", false); //Idleアニメに切り替え
-            }
-            else //左右が押されている
-            {
-                animator.SetBool("Run", true); //Runアニメに切り替え
-            }
+        if (axisH == 0) //左右が押されていない
+        {
+            animator.SetBool("Run", false); //Idleアニメに切り替え
+        }
+        else //左右が押されている
+        {
+            animator.SetBool("Run", true); //Runアニメに切り替え
+        }
         //}
     }
     //ジャンプボタンが押された時に呼び出されるメソッド
@@ -95,6 +95,17 @@ public class PlayerController : MonoBehaviour
         {
             goJump = true; //ジャンプフラグをON
             animator.SetTrigger("Jump");
+        }
+    }
+
+    //isTrigger特性を持っているColliderとぶつかったら処理される
+    void OnTriggerEnter2D(Collider2D collision)
+    {
+        //if(collision.gameObject.tag=="Goal")
+        if (collision.gameObject.CompareTag("Goal"))
+        {
+            GameManager.gameState = "gameclear";
+            Debug.Log("ゴールに接触した！");
         }
     }
 }
