@@ -1,3 +1,4 @@
+using JetBrains.Annotations;
 using UnityEditor.SearchService;
 using UnityEngine;
 
@@ -27,6 +28,12 @@ public class PlayerController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        //ゲームのステータスがplayingではないなら
+        if (GameManager.gameState != "playing")
+        {
+            return; //その１フレームを強制終了
+        }
+
         //もしも水平方向のキー「← 」「→」 が押されたら、Playerが動くように設定。!=0→「０でなければ押されたとみなす」
         //省いても成立するのでコメントアウト
         // if (Inpu.GetAxisRaw("Horizontal") != 0){}
@@ -50,7 +57,6 @@ public class PlayerController : MonoBehaviour
         {
             Jump(); //Jumpメソッドの発動
         }
-
     }
 
     //１秒間に50回(50fps)繰り返すように制御しながら行う繰り返しメソッド（ユーザごとのPC環境で変化しないように制御するフレームレートを追加）
@@ -106,6 +112,24 @@ public class PlayerController : MonoBehaviour
         {
             GameManager.gameState = "gameclear";
             Debug.Log("ゴールに接触した！");
+            Goal();
         }
     }
+
+    //ゴールした時のメソッド
+    public void Goal()
+    {
+        animator.SetBool("Clear", true); //クリアアニメに切り替え
+        GameStop(); //プレイヤーのVelocityを止めるメソッド
+    }
+
+    void GameStop()
+    {
+        //速度を０にリセット
+        rbody.linearVelocity=new Vector2(0,0);
+        //rbody.lineaVelocity = Vector2.zero;
+    }
+
+
+  
 }
