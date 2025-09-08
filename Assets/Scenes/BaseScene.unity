@@ -329,7 +329,7 @@ Transform:
   m_GameObject: {fileID: 519420028}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -1.65, y: 0.43, z: -10}
+  m_LocalPosition: {x: -1.75, y: 0.64, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -351,7 +351,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   leftLimit: -1.6
-  rightLimit: 300
+  rightLimit: 14.61
   bottomLimit: 0
   topLimit: 4
   isScrollX: 0
@@ -1622,13 +1622,13 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: 
-        m_MethodName: 
+      - m_Target: {fileID: 1051354084}
+        m_TargetAssemblyTypeName: ChangeScene, Assembly-CSharp
+        m_MethodName: Load
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: 
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 
@@ -1877,6 +1877,7 @@ GameObject:
   - component: {fileID: 1534181915}
   - component: {fileID: 1534181914}
   - component: {fileID: 1534181913}
+  - component: {fileID: 1534181916}
   m_Layer: 5
   m_Name: NextButton
   m_TagString: Untagged
@@ -1947,7 +1948,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1534181914}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1534181916}
+        m_TargetAssemblyTypeName: ChangeScene, Assembly-CSharp
+        m_MethodName: Load
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1534181914
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1986,6 +1999,19 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1534181911}
   m_CullTransparentMesh: 1
+--- !u!114 &1534181916
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1534181911}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0a3cdd32af2cd4cbb86fa8e2224992a2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  sceneName: Stage1
 --- !u!1 &1556966673
 GameObject:
   m_ObjectHideFlags: 0
@@ -2427,6 +2453,7 @@ GameObject:
   - component: {fileID: 1894805602}
   - component: {fileID: 1894805601}
   - component: {fileID: 1894805605}
+  - component: {fileID: 1894805606}
   m_Layer: 5
   m_Name: Canvas
   m_TagString: Untagged
@@ -2536,6 +2563,22 @@ MonoBehaviour:
   nextButton: {fileID: 1534181911}
   gameClearSprite: {fileID: 21300000, guid: 560a4ec14389e96458b3b544907b0437, type: 3}
   gameOverSprite: {fileID: 21300000, guid: 8c724e7c9c31dc4498fbc559e7c0a1ad, type: 3}
+--- !u!114 &1894805606
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1894805600}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3732de872d993437c9b44f777ac82c15, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  isCountDown: 1
+  gameTime: 10
+  isTimeOver: 0
+  displayTime: 0
 --- !u!1 &2040054543
 GameObject:
   m_ObjectHideFlags: 0
