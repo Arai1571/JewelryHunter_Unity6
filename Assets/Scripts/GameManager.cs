@@ -2,8 +2,10 @@ using UnityEngine;
 
 public class GameManager : MonoBehaviour
 {
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
     public static string gameState; //静的メンバ
+
+    public static int totalScore; //ゲーム全般を通してのスコア
+    public static int stageScore; //そのステージに獲得したスコア
 
     //startよりも前に処理される
     void Awake()

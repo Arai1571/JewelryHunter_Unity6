@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class TImeController : MonoBehaviour
+public class TimeController : MonoBehaviour
 {
     //カウントダウンにするかどうかのフラグ
     //falseならカウントアップ
@@ -37,7 +37,7 @@ public class TImeController : MonoBehaviour
         if (!isTimeOver)
         {
             //停止フラグが立っていないので処理したいが
-            //ゲームステータスがPlayingで亡くなった時は止めたい
+            //ゲームステータスがPlayingではなくなった時は止めたい
             if (GameManager.gameState != "playing")
             {
                 isTimeOver = true; //停止フラグをON
