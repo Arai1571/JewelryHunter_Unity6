@@ -31,7 +31,7 @@ public class CanonController : MonoBehaviour
     {
         //プレイヤーを取得
         player = GameObject.FindGameObjectWithTag("Player");
-        
+
     }
 
     // Update is called once per frame
@@ -57,10 +57,13 @@ public class CanonController : MonoBehaviour
                 float y = Mathf.Sin(angleZ * Mathf.Deg2Rad);
                 Vector2 v = new Vector2(x, y) * fireSpeed;
                 rbody.AddForce(v, ForceMode2D.Impulse);
-            
+
             }
-
-
         }
+    }
+    //範囲表示
+    void OnDrawGizmosSelected()
+    {
+        Gizmos.DrawWireSphere(transform.position, length);
     }
 }

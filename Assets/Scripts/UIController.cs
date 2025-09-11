@@ -16,11 +16,13 @@ public class UIController : MonoBehaviour
     TimeController timeCnt; //TimeController.csを扱うための変数。表でいじる必要がないので、publicにはしないで、下記のメソッドでのみいじればOK
     public GameObject timeText; //ヒエラルキーTimeBarの中に入っているTimeTextを扱うための変数
 
+    public GameObject scoreText; //スコアオブジェクト
+
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        timeCnt = GetComponent<TimeController>(); 
+        timeCnt = GetComponent<TimeController>();
 
         buttonPanel.SetActive(false); //存在を非表示
 
@@ -63,5 +65,11 @@ public class UIController : MonoBehaviour
     void InactiveImage()
     {
         mainImage.SetActive(false);
+    }
+
+    void UpdateScore()
+    {
+        int Score = GameManager.stageScore + GameManager.totalScore;
+        scoreText.GetComponent<TextMeshProUGUI>().text = Score.ToString();
     }
 }
