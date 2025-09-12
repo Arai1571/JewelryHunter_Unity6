@@ -1284,7 +1284,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0a3cdd32af2cd4cbb86fa8e2224992a2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  sceneName: BaseScene
+  sceneName: Stage1
   toTitle: 0
 --- !u!1660057539 &9223372036854775807
 SceneRoots:

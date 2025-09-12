@@ -46,9 +46,5 @@ public class SoundController : MonoBehaviour
         audio.loop = true; //BGMはループする設定
         audio.Play();      //再生する
     }
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
+    
 }

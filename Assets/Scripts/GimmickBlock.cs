@@ -9,7 +9,7 @@ public class GimmickBlock : MonoBehaviour
     public bool isDelete = false; //落下後に削除するフラグ
 
     [Header("当たり判定オブジェクト")]
-    public GameObject deadobj; //死亡当たり
+    public GameObject deadObj; //死亡当たり
 
     bool isFell = false; //落下フラグ
     float fadeTime = 0.5f; //フェードアウト時間
@@ -20,7 +20,7 @@ public class GimmickBlock : MonoBehaviour
         //Rigidbody2Dの物理挙動を停止
         Rigidbody2D rbody = GetComponent<Rigidbody2D>();
         rbody.bodyType = RigidbodyType2D.Static;
-        deadobj.SetActive(false);  //死亡当たりを非表示        
+        deadObj.SetActive(false);  //死亡当たりを非表示        
     }
 
     // Update is called once per frame
@@ -38,7 +38,7 @@ public class GimmickBlock : MonoBehaviour
                 {
                     //Rigidbody2Dの物理挙動を開始
                     rbody.bodyType = RigidbodyType2D.Dynamic;
-                    deadobj.SetActive(true); //死亡当たりを表示
+                    deadObj.SetActive(true); //死亡当たりを表示
                 }
             }
         }

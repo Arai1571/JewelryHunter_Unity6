@@ -11,9 +11,4 @@ public class ResultManager : MonoBehaviour
         scoreText.GetComponent<TextMeshProUGUI>().text = GameManager.totalScore.ToString();
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
 }
