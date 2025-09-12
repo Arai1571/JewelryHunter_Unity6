@@ -83,7 +83,6 @@ public class PlayerController : MonoBehaviour
         }
 
         //if (onGround)//地面の上にいるとき
-        //{
         if (axisH == 0) //左右が押されていない
         {
             animator.SetBool("Run", false); //Idleアニメに切り替え
