@@ -34,7 +34,7 @@ public class UIController : MonoBehaviour
         UpdateScore();                //トータルスコアが出るように更新
 
         //AudioSource,SoundControllerの取得
-        audio = GetComponent<AidioSource>();
+        audio = GetComponent<AudioSource>();
         soundController = GetComponent<SoundController>();
     }
 
@@ -107,6 +107,23 @@ public class UIController : MonoBehaviour
             //一旦displayTimeの数字を変数timesに渡す
             float times = timeCnt.displayTime;
             timeText.GetComponent<TextMeshProUGUI>().text = Mathf.Ceil(times).ToString();
+
+            if (timeCnt.isCountDown)
+            {
+                if (timeCnt.displayTime <= 0)
+                {
+                    //プレイヤーを見つけてきて、そのPlayer ControllerコンポーネントのGameOverメソッドをやらせている
+                    GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerController>().GameOver();
+                    GameManager.gameState = "gameover";
+                }
+            }
+            else
+            {
+                if (timeCnt.displayTime >= timeCnt.gameTime)
+                {
+                    GameManager.gameState = "gameover";
+                }
+            }
 
             //スコアをリアルタイムに更新する
             UpdateScore();

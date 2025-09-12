@@ -14,6 +14,10 @@ public class CanonController : MonoBehaviour
     GameObject player; //プレイヤー
     float passedTimes = 0; //経過時間
 
+    AudioSource audio;
+    public AudioClip se_Shoot;
+
+
     //距離チェック
     bool CheckLength(Vector2 targetPos)
     {
@@ -32,6 +36,7 @@ public class CanonController : MonoBehaviour
         //プレイヤーを取得
         player = GameObject.FindGameObjectWithTag("Player");
 
+        audio = GetComponent<AudioSource>();
     }
 
     // Update is called once per frame
@@ -58,6 +63,7 @@ public class CanonController : MonoBehaviour
                 Vector2 v = new Vector2(x, y) * fireSpeed;
                 rbody.AddForce(v, ForceMode2D.Impulse);
 
+                audio.PlayOneShot(se_Shoot);
             }
         }
     }
