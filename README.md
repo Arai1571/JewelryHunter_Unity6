@@ -1,8 +1,8 @@
 # JewelryHunter_Unity6
 
-[ゲームのサンプルプレイ](https://arai1571.github.io/JewelryHunter_web/)
+[ゲームプレイはこちら](https://arai1571.github.io/JewelryHunter_web/)
 
-![ゲーム画面](readImg/jewelryhunter_image.png)
+![ゲーム画面](readmeImg/jewelryhunter_image.jpg)
 
 ## 訓練校で学習した初２D作品
 * Playerの動作
@@ -13,5 +13,55 @@
 ## 制作のポイント
 ### アニメーションをトランジションで作成
 Playerのアニメ切り替えには各クリップをトランジションで繋いでフラグで管理しました。トランジションを組み込むことで、アニメ切り替えが滑らかになり、かつコーディングが効率的なものになりました。
-![トランジションの画像](readImg/jewelryhunter_animation.png)
+![トランジションの画像](readmeImg/jewelryhunter_animation.jpg)
+
+## Itemのコーディングの効率化
+Itemは列挙型のItemColorを自作し、ITemColor型の変数次第で何色が選ばれるかにより見た目が変わるように行いました。
+![Itemコーディングの効率化](readmeImg/item.jpg)
+
+```C#
+using UnityEngine;
+
+public enum ItemColor
+{
+    White,
+    Blue,
+    Green,
+    Red
+}
+
+public class ItemData : MonoBehaviour
+{
+    public ItemColor colors = ItemColor.White;
+    public Sprite[] itemSprites;
+
+    public int value = 0; //整数値を設定できる
+
+    void Start()
+    {
+        SpriteRenderer spriteRenderer = GetComponent<SpriteRenderer>();
+
+        switch (colors)
+        {
+            case ItemColor.White:
+                spriteRenderer.sprite = itemSprites[0];
+                break;
+            case ItemColor.Blue:
+                spriteRenderer.sprite = itemSprites[1];
+                break;
+            case ItemColor.Green:
+                spriteRenderer.sprite = itemSprites[2];
+                break;
+            case ItemColor.Red:
+                spriteRenderer.sprite = itemSprites[3];
+                break;
+        }
+    }
+}
+```
+## TextMeshProのデザイン切り分け
+TextMeshProのデザインを細かく切り分けてデータを用意するなど工夫しました。
+![TextMeshProデザインの絵](readmeImg/textmeshpro.jpg)
+
+
 
