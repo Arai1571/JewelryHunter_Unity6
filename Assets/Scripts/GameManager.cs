@@ -13,15 +13,4 @@ public class GameManager : MonoBehaviour
         //ゲームの初期状態をplaying
         gameState = "playing";
     }
-
-    void Start()
-    {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
 }

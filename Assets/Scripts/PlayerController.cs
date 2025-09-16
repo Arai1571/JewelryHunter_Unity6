@@ -25,11 +25,10 @@ public class PlayerController : MonoBehaviour
     void Start()
     {
         rbody = GetComponent<Rigidbody2D>(); //Playerについているコンポーネント情報を取得。Unity空間から呼び出し
+
         animator = GetComponent<Animator>(); //Animatorコンポーネントの情報を取得。
 
         audio = GetComponent<AudioSource>(); //AudioSourceコンポーネントの情報を代入
-
-
     }
 
     // Update is called once per frame
@@ -176,7 +175,5 @@ public class PlayerController : MonoBehaviour
         rbody.linearVelocity=new Vector2(0,0);
         //rbody.lineaVelocity = Vector2.zero;
     }
-
-
   
 }

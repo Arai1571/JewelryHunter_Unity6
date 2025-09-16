@@ -62,6 +62,3 @@ public class ItemData : MonoBehaviour
 ## TextMeshProのデザイン切り分け
 TextMeshProのデザインを細かく切り分けてデータを用意するなど工夫しました。
 ![TextMeshProデザインの絵](readmeImg/textmeshpro.jpg)
-
-
-

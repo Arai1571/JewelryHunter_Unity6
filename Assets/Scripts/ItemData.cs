@@ -33,10 +33,6 @@ public class ItemData : MonoBehaviour
             case ItemColor.Red:
                 spriteRenderer.sprite = itemSprites[3];
                 break;
-
-
-
         }
-
     }
 }
